@@ -81,7 +81,7 @@ def main():
         for i in index_to_view:
             b_author = result[i][0]
             b_title = result[i][1]
-            b_article = str(result[i][2])[0:30]  # Text Summarization
+            b_article = str(result[i][2])[0:50]  # Text Summarization
             b_post_date = result[i][3]
             st.markdown(title_temp.format(b_title, b_author,
                                           b_article, b_post_date), unsafe_allow_html=True)
@@ -105,8 +105,8 @@ def main():
     elif choice == 'Add Post':
         st.subheader("Add Articles")
         create_table()
-        blog_author = st.text_input("Enter Author Name", max_chars=50)
-        blog_title = st.text_input("Enter Post Title", max_chars=50)
+        blog_author = st.text_input("Enter Author Name")
+        blog_title = st.text_input("Enter Post Title")
         blog_article = st.text_area("Post Article", height=200)
         blog_date = st.date_input("Date")
         if st.button("ADD"):
@@ -139,7 +139,7 @@ def main():
         result = view_all_notes()
         clean_db = pd.DataFrame(
             result, columns=['Author', 'Title', 'Articles', 'Post Date'])
-        st.dataframe(clean_db, width=1500)
+        st.dataframe(clean_db)
         unique_titles = [i[0] for i in view_all_titles()]
         delete_blog_by_title = st.selectbox("Delete Blog", unique_titles)
 
